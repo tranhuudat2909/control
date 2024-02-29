@@ -1,0 +1,62 @@
+/* Thêm kiểu cho bắt đầu - dừng*/
+.start-stop {
+  /* border: 1px solid #ccc;  */
+}
+
+.start-button.active {
+  background-color: greenyellow;
+  color: black;
+  /* Bạn có thể thay đổi các thuộc tính khác tùy thuộc vào yêu cầu thiết kế của bạn */
+}
+
+.stop-button.active {
+  background-color: red;
+  color: black;
+  /* Bạn có thể thay đổi các thuộc tính khác tùy thuộc vào yêu cầu thiết kế của bạn */
+}
+
+.start-button,
+.stop-button {
+  padding: 10px 20px; /* Điều chỉnh lề theo cần thiết cho kích thước mong muốn của bạn */
+  font-size: 16px;    /* Điều chỉnh kích thước font theo cần thiết */
+}
+
+.start-button {
+  margin-right: 20px; /* Điều chỉnh lề để căn chỉnh với nút "thủ công" */
+}
+
+.stop-button {
+  margin-left: 20px; /* Điều chỉnh lề để căn chỉnh với nút "tự động" */
+}
+
+/* Thêm kiểu cho chuyển đổi thủ công - tự động*/
+.toggle-buttons {
+  /* border: 1px solid #ccc; */
+}
+
+.manual-button.active,
+.auto-button.active {
+  background-color: rgb(0, 255, 204);
+  color: black;
+  /* Bạn có thể thay đổi các thuộc tính khác tùy thuộc vào yêu cầu thiết kế của bạn */
+}
+
+.manual-button,
+.auto-button {
+  padding: 10px 20px; /* Điều chỉnh lề theo cần thiết cho kích thước mong muốn của bạn */
+  font-size: 16px;    /* Điều chỉnh kích thước font theo cần thiết */
+}
+
+.manual-button {
+  margin-right: 30px; /* Điều chỉnh lề để căn chỉnh với nút "bắt đầu" */
+}
+
+.auto-button {
+  margin-left: 40px; /* Điều chỉnh lề để căn chỉnh với nút "dừng" */
+}
+
+/* Chỉnh size cho <p> */
+.mode-label {
+  font-size: 20px; /* Bạn có thể điều chỉnh kích thước font theo cần thiết */
+}
+

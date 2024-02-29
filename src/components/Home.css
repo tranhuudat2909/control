@@ -1,0 +1,106 @@
+body {
+  /* background-image: url('https://e0.pxfuel.com/wallpapers/413/334/desktop-wallpaper-iot-internet-of-things-u.jpg'); 
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; */
+  background-color: snow;
+}
+
+.cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+  
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Adjust the width of the form container */
+}
+
+.left-form{
+  /* border: 1px solid #ccc;  */
+  padding: 20px; /* chỉnh độ rộng giữa nội dung và khung background*/
+  width: 40%; /* chỉnh độ rộng khung form */
+  
+  display: flex;
+  flex-direction: column;
+  text-align: center; /* chỉnh nội dung form về center */
+  background-color: snow;
+
+ /* Thay đổi giá trị này để đặt khoảng trắng bên trái của form */
+ 
+  margin-right: auto; 
+  margin-left: 0px; 
+}
+
+.right-form{
+  /* border: 1px solid #ccc;  */
+  padding: 20px; /* chỉnh độ rộng giữa nội dung và khung background*/
+  width: 40%; /* chỉnh độ rộng khung form */
+  display: flex;
+  flex-direction: column;
+  text-align: center; /* chỉnh nội dung form về center */
+  background-color: snow;
+
+ /* Thay đổi giá trị này để đặt khoảng trắng bên phải của form */
+
+  margin-left: auto; 
+  margin-right: 0px; 
+}
+
+
+label {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+
+/* Thêm kiểu cho table */
+table {
+  border-collapse: collapse;  
+  width: 1000px;
+  margin-top: 0; /* Đặt giá trị margin-top thành 0 để bỏ khoảng trắng phía trên */
+  margin-bottom: 20px; /* Thêm khoảng trắng phía dưới nếu cần */
+  background-color: snow;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: yellowgreen;
+}
+
+/* Thêm kiểu cho các tiêu đề của Header */
+.tieude-chinh {
+  margin-top: 0;
+  font-size: 60px;
+  text-align: center;
+  color: black; 
+  font-weight: bold;
+  background-color: greenyellow;
+}
+
+.tieude-bang{
+  font-size: 40px;
+  text-align: center;
+}
+
+/* Thêm kiểu cho nút nhấn chuyển trang*/
+.button {
+  margin-top: 30px;
+  padding: 10px;
+  background-color: greenyellow;
+  color: pink;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  align-self: center;
+}

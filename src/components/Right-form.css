@@ -1,0 +1,22 @@
+/* Thêm kiểu cho nút nhấn submit */
+
+input[type="submit"] {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    min-width: 10px; /* Đặt độ rộng tối thiểu cho nút */
+    box-sizing: border-box; /* Bảo đảm rằng padding không làm thay đổi kích thước của phần tử */
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  /* Thêm kiểu cho thanh trượt */
+input[type="range"] {
+    width: 100%;
+  }
