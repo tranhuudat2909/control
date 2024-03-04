@@ -25,31 +25,30 @@ function Home() {
 // NÚT MANUAL
 const setModeManual = () => {
   console.log('Setting mode to manual');
-  setMode('manual');
-  //setControl('stop');
+  setMode('0');
   setStopSystem();
-  localStorage.setItem('mode', 'manual');
+  localStorage.setItem('mode', '0');
 };
 
   // NÚT AUTO
   const setModeAuto = () => {
     console.log('Setting mode to auto');
-    setMode('auto');
+    setMode('1');
     // Lưu trạng thái mới vào localStorage
-    localStorage.setItem('mode', 'auto');
+    localStorage.setItem('mode', '1');
   };
 
 // NÚT START 
 const setStartSystem = () => {
   console.log('Giá trị của mode khi bấm START:', mode);
 
-  if (mode === 'auto') {
+  if (mode === '1') {
 
-    setControl('start');
+    setControl('1');
     // Lưu trạng thái mới vào localStorage
-    localStorage.setItem('control', 'start');
+    localStorage.setItem('control', '1');
     
-  } else if (mode === 'manual') {
+  } else if (mode === '0') {
     // Thông báo lỗi khi chế độ là 'manual'
     // window.alert('Không thể "start" hệ thống khi chế độ là "manual"');
     // console.log('Hiển thị thông báo');
@@ -61,8 +60,8 @@ const setStartSystem = () => {
 
 // NÚT STOP 
 const setStopSystem = () => {
-  setControl('stop');
-  localStorage.setItem('control', 'stop');        
+  setControl('0');
+  localStorage.setItem('control', '0');        
 };
 
 
@@ -73,8 +72,8 @@ useEffect(() => {
       await axios.post(
         'https://ap-southeast-1.aws.data.mongodb-api.com/app/application-0-zsywh/endpoint/auto',
         {
-          mode: mode === 'auto' ? 'auto' : 'manual',
-          control: control === 'start' ? 'start' : 'stop',
+          mode: mode === '1' ? '1' : '0', // 1 thì là mode : auto
+          control: control === '1' ? '1' : '0', // 1 thì là control : start
         }
       );
     } catch (error) {
@@ -98,14 +97,14 @@ useEffect(() => {
       console.log('Dữ liệu từ MongoDB:', data);
 
       // // Xử lý logic dựa trên giá trị control
-      if (data.length > 0 && data[0].control === 'start') {
+      if (data.length > 0 && data[0].control === '1') {
         setStartSystem();
       } else {
         setStopSystem();
       }
 
       // // Xử lý logic dựa trên giá trị mode
-      if (data.length > 0 && data[0].mode === 'manual') {
+      if (data.length > 0 && data[0].mode === '0') {
         setModeManual();
       } else {
         setModeAuto();
@@ -119,16 +118,12 @@ useEffect(() => {
   // Gọi fetchDataFromMongoDB mỗi khi component được render
   fetchDataFromMongoDB();
 
-  // Thiết lập interval để cập nhật dữ liệu mỗi 5 giây (hoặc bất kỳ khoảng thời gian nào bạn muốn)
-  const intervalId = setInterval(fetchDataFromMongoDB, 5000);
+  // Thiết lập interval để cập nhật dữ liệu mỗi 3 giây (hoặc bất kỳ khoảng thời gian nào bạn muốn)
+  const intervalId = setInterval(fetchDataFromMongoDB, 3000);
 
   // Clear interval khi component unmount để tránh memory leaks
   return () => clearInterval(intervalId);
 }, []); // useEffect chỉ chạy một lần khi component được mount
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +133,7 @@ const submit = async (e) => {
   e.preventDefault();
 
   // Kiểm tra nếu chế độ là 'auto', hiển thị cảnh báo và không gửi dữ liệu
-  if (mode === 'auto') {
+  if (mode === '1') {
     window.alert('Không thể gửi dữ liệu khi chế độ là "auto".');
     return;
   }
@@ -198,10 +193,10 @@ const submit = async (e) => {
           <h1 className='tieude-bang'> BẢNG ĐIỀU KHIỂN TỰ ĐỘNG</h1>
           <div className='toggle-buttons'>
           <p className='mode-label'>CHỌN CHẾ ĐỘ ĐIỀU KHIỂN: </p>
-            <button onClick={setModeManual} className={`manual-button ${mode === 'manual' ? 'active' : ''}`}>       
+            <button onClick={setModeManual} className={`manual-button ${mode === '0' ? 'active' : ''}`}>       
               MANUAL
             </button>
-            <button onClick={setModeAuto} className={`auto-button ${mode === 'auto' ? 'active' : ''}`}>
+            <button onClick={setModeAuto} className={`auto-button ${mode === '1' ? 'active' : ''}`}>
               AUTO
             </button>
           </div>
@@ -210,12 +205,12 @@ const submit = async (e) => {
             <p className='mode-label'>NÚT ĐIỀU KHIỂN CHẾ ĐỘ TỰ ĐỘNG: </p>
             <button
               onClick={setStartSystem}
-              className={`start-button ${control === 'start' ? 'active' : ''}`}
-              disabled={mode === 'manual'} // Tắt nút khi chế độ là 'manual'
+              className={`start-button ${control === '1' ? 'active' : ''}`}
+              disabled={mode === '0'} // Tắt nút khi chế độ là 'manual'
               >
               START
             </button>
-            <button onClick={setStopSystem} className={`stop-button ${control === 'stop' ? 'active' : ''}`}>
+            <button onClick={setStopSystem} className={`stop-button ${control === '0' ? 'active' : ''}`}>
               STOP
             </button>
           </div>                   
