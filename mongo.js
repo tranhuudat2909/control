@@ -27,7 +27,7 @@ const newSchema=new mongoose.Schema({
         required:true
     },
     mode:{
-        type:String,
+        type:Number,
         required:true
     },
     control:{

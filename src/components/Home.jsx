@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 
 
 function Home() {
-  const [servo1, setservo1] = useState(0);
+  const [servo1, setservo1] = useState(-3);
   const [servo2, setservo2] = useState(0);
-  const [servo3, setservo3] = useState(0);
+  const [servo3, setservo3] = useState(50);
   const [servo4, setservo4] = useState(0);
   const [data, setData] = useState([]);
   const [sortedData, setSortedData] = useState([]);
@@ -25,30 +25,30 @@ function Home() {
 // NÚT MANUAL
 const setModeManual = () => {
   console.log('Setting mode to manual');
-  setMode('0');
+  setMode(0);
   setStopSystem();
-  localStorage.setItem('mode', '0');
+  localStorage.setItem('mode', 0);
 };
 
   // NÚT AUTO
   const setModeAuto = () => {
     console.log('Setting mode to auto');
-    setMode('1');
+    setMode(1);
     // Lưu trạng thái mới vào localStorage
-    localStorage.setItem('mode', '1');
+    localStorage.setItem('mode', 1);
   };
 
 // NÚT START 
 const setStartSystem = () => {
   console.log('Giá trị của mode khi bấm START:', mode);
 
-  if (mode === '1') {
+  if (mode === 1) {
 
-    setControl('1');
+    setControl(1);
     // Lưu trạng thái mới vào localStorage
-    localStorage.setItem('control', '1');
+    localStorage.setItem('control', 1);
     
-  } else if (mode === '0') {
+  } else if (mode === 0) {
     // Thông báo lỗi khi chế độ là 'manual'
     // window.alert('Không thể "start" hệ thống khi chế độ là "manual"');
     // console.log('Hiển thị thông báo');
@@ -60,8 +60,8 @@ const setStartSystem = () => {
 
 // NÚT STOP 
 const setStopSystem = () => {
-  setControl('0');
-  localStorage.setItem('control', '0');        
+  setControl(0);
+  localStorage.setItem('control', 0);        
 };
 
 
@@ -72,8 +72,8 @@ useEffect(() => {
       await axios.post(
         'https://ap-southeast-1.aws.data.mongodb-api.com/app/application-0-zsywh/endpoint/auto',
         {
-          mode: mode === '1' ? '1' : '0', // 1 thì là mode : auto
-          control: control === '1' ? '1' : '0', // 1 thì là control : start
+          mode: mode === 1 ? 1 : 0, // 1 thì là mode : auto
+          control: control === 1 ? 1 : 0, // 1 thì là control : start
         }
       );
     } catch (error) {
@@ -97,14 +97,14 @@ useEffect(() => {
       console.log('Dữ liệu từ MongoDB:', data);
 
       // // Xử lý logic dựa trên giá trị control
-      if (data.length > 0 && data[0].control === '1') {
+      if (data.length > 0 && data[0].control === 1) {
         setStartSystem();
       } else {
         setStopSystem();
       }
 
       // // Xử lý logic dựa trên giá trị mode
-      if (data.length > 0 && data[0].mode === '0') {
+      if (data.length > 0 && data[0].mode === 0) {
         setModeManual();
       } else {
         setModeAuto();
@@ -133,7 +133,7 @@ const submit = async (e) => {
   e.preventDefault();
 
   // Kiểm tra nếu chế độ là 'auto', hiển thị cảnh báo và không gửi dữ liệu
-  if (mode === '1') {
+  if (mode === 1) {
     window.alert('Không thể gửi dữ liệu khi chế độ là "auto".');
     return;
   }
@@ -193,10 +193,10 @@ const submit = async (e) => {
           <h1 className='tieude-bang'> BẢNG ĐIỀU KHIỂN TỰ ĐỘNG</h1>
           <div className='toggle-buttons'>
           <p className='mode-label'>CHỌN CHẾ ĐỘ ĐIỀU KHIỂN: </p>
-            <button onClick={setModeManual} className={`manual-button ${mode === '0' ? 'active' : ''}`}>       
+            <button onClick={setModeManual} className={`manual-button ${mode === 0 ? 'active' : ''}`}>       
               MANUAL
             </button>
-            <button onClick={setModeAuto} className={`auto-button ${mode === '1' ? 'active' : ''}`}>
+            <button onClick={setModeAuto} className={`auto-button ${mode === 1 ? 'active' : ''}`}>
               AUTO
             </button>
           </div>
@@ -205,12 +205,12 @@ const submit = async (e) => {
             <p className='mode-label'>NÚT ĐIỀU KHIỂN CHẾ ĐỘ TỰ ĐỘNG: </p>
             <button
               onClick={setStartSystem}
-              className={`start-button ${control === '1' ? 'active' : ''}`}
-              disabled={mode === '0'} // Tắt nút khi chế độ là 'manual'
+              className={`start-button ${control === 1 ? 'active' : ''}`}
+              disabled={mode === 0} // Tắt nút khi chế độ là 'manual'
               >
               START
             </button>
-            <button onClick={setStopSystem} className={`stop-button ${control === '0' ? 'active' : ''}`}>
+            <button onClick={setStopSystem} className={`stop-button ${control === 0 ? 'active' : ''}`}>
               STOP
             </button>
           </div>                   
@@ -222,8 +222,8 @@ const submit = async (e) => {
                             BASE 
                             <input
                                 type="range"
-                                min="0"
-                                max="180"
+                                min="-3"
+                                max="5"
                                 value={servo1}
                                 onChange={(e) => { setservo1(e.target.value) }}
                             />
@@ -244,7 +244,7 @@ const submit = async (e) => {
                             ELBOW
                             <input
                                 type="range"
-                                min="0"
+                                min="50"
                                 max="180"
                                 value={servo3}
                                 onChange={(e) => { setservo3(e.target.value) }}
@@ -256,7 +256,7 @@ const submit = async (e) => {
                             <input
                                 type="range"
                                 min="0"
-                                max="180"
+                                max="70"
                                 value={servo4}
                                 onChange={(e) => { setservo4(e.target.value) }}
                             />
