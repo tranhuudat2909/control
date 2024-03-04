@@ -14,8 +14,8 @@ function Home() {
   const [data, setData] = useState([]);
   const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState('asc');
-  const [mode, setMode] = useState(localStorage.getItem('mode') || '');
-  const [control, setControl] = useState(localStorage.getItem('control') || '');
+  const [mode, setMode] = useState(Number(localStorage.getItem('mode')) || 0);
+  const [control, setControl] = useState(Number(localStorage.getItem('control')) || '');
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
